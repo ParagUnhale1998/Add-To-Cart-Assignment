@@ -1,0 +1,17 @@
+<div class="allProductsContainer">
+    <ul>
+      <li *ngFor="let product of products.slice(0, 24)">
+        <div class="product-item">
+          <img [src]="product.thumbnail" alt="{{ product.title }}">
+          <div class="product-details">
+            <img [src]="product.thumbnail" alt="{{ product.title }}">
+            <h2>{{ product.title }}</h2>
+            <h4>{{ product.description }}</h4>
+            <p>Price: {{ product.price }}</p>
+            <button (click)="addToCart(product)">Add to Cart</button>
+        </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
