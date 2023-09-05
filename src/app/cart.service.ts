@@ -1,34 +1,31 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-
+  public saleProcessedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  
+  get saleProcessedUpdates(): Observable<boolean> {
+    return this.saleProcessedSubject.asObservable();
+  }
+  setSaleProcessed(status: boolean): void {
+    this.saleProcessedSubject.next(status);
+  }
   cartItems: any[] = [
-  //   {
-  //     "id": 8,
-  //     "title": "Microsoft Surface Laptop 4",
-  //     "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
-  //     "price": 1499,
-  //     "discountPercentage": 10.23,
-  //     "rating": 4.43,
-  //     "stock": 68,
-  //     "brand": "Microsoft Surface",
-  //     "category": "laptops",
-  //     "thumbnail": "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
-  //     "images": [
-  //         "https://i.dummyjson.com/data/products/8/1.jpg",
-  //         "https://i.dummyjson.com/data/products/8/2.jpg",
-  //         "https://i.dummyjson.com/data/products/8/3.jpg",
-  //         "https://i.dummyjson.com/data/products/8/4.jpg",
-  //         "https://i.dummyjson.com/data/products/8/thumbnail.jpg"
-  //     ]
-  // }
+  
   ];
+ 
 
   addToCart(product: any): void {
-    this.cartItems.push(product);
+    // this.getCartItems()
+    const existingProduct = this.cartItems.find((item) => item.id === product.id);
+    if (existingProduct) {
+      alert(`Product "${product.title}" is already in the cart.`);
+    } else {
+      this.cartItems.push(product);
+    }
   }
   
   removeFromCart(product: any): void {
@@ -37,8 +34,28 @@ export class CartService {
       this.cartItems.splice(index, 1);
     }
   }
+ 
+  clearCart(): void {
+    this.cartItems = []; // Set the cartItems array to an empty array
+  }
 
   getCartItems(): any[] {
     return this.cartItems;
   }
+
+
+  private cartSummarySubject: BehaviorSubject<void> = new BehaviorSubject<void>(undefined); // Change null to undefined
+
+  constructor() {}
+
+  // Observable to listen for cart summary updates
+  get cartSummaryUpdates(): Observable<void> {
+    return this.cartSummarySubject.asObservable();
+  }
+
+  // Trigger a cart summary update
+  updateCartSummary(): void {
+    this.cartSummarySubject.next(undefined); // Change null to undefined
+  }
+
 }

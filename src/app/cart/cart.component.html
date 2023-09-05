@@ -31,21 +31,21 @@
         </tr>
         <tr>
           <td>VAT Tax</td>
-          <td>{{ vatTax }}</td>
+          <td>{{ vatTax | number: '1.2-2' }}</td>
         </tr>
         <tr>
           <td>Discount</td>
-          <td>{{ discount }}</td>
+          <td>{{ discount | number: '1.2-2' }}</td>
         </tr>
         <tr>
           <td>Total</td>
-          <td>{{ total }}</td>
+          <td>{{ total | number: '1.2-2'}}</td>
         </tr>
       </table>
     </div>
     <div class="buttonContainer">
-        <button class="cancel-button">Cancel Sale</button>
-        <button class="process-button">Process Sale</button>
+        <button class="cancel-button" (click)="removeAllItems()">Cancel Sale</button>
+        <button class="process-button" (click)="processSale()">Process Sale</button>
     </div>
   </div>
   

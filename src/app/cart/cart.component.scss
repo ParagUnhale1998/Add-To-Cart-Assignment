@@ -31,17 +31,13 @@
         width: 60px; /* Adjust the width as needed */
         padding: 5px;
         border: 1px solid #ccc;
+        outline: none;
         border-radius: 5px;
         font-size: 14px;
         text-align: center;
         transition: border-color 0.3s;
       }
       
-      /* Hover and focus styles */
-      input:hover,
-      input:focus {
-     border: none;
-      }
       
       
 
@@ -117,3 +113,6 @@
     
   }
   
+  /* receipt.component.scss */
+
+

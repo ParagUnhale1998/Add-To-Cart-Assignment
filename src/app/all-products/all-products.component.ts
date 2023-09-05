@@ -39,15 +39,9 @@ export class AllProductsComponent {
   // }
 
   addToCart(product: any): void {
-    // Check if the product is already in the cart
-    const existingProduct = this.cartItems.find((item) => item.id === product.id);
-  
-    if (existingProduct) {
-      // If the product is already in the cart, display a message
-      alert(`Product "${product.title}" is already in the cart.`);
-    } else {
-      // If the product is not in the cart, add it with a quantity of 1
-      this.cartItems.push({ ...product, quantity: 1 });
-    }
+      product.quantity = 1
+      this.cartService.addToCart(product)
+    this.cartService.updateCartSummary();
+
   }
 }

@@ -1,0 +1,37 @@
+<div class="receipt-container">
+    <h3>Sale Receipt</h3>
+    
+    <!-- Sale Number and Date -->
+    <p>Sale No: {{ saleNumber }}</p>
+    <p>Date: {{ currentDate | date }}</p>
+  
+    <!-- Table of Products -->
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems">
+          <td>{{ item.id }}</td>
+          <td>{{ item.title }}</td>
+          <td >{{ item.quantity }}</td>
+          <td>{{ item.price * item.quantity}}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Sale Summary -->
+    <p>Total Items: {{ cartItems.length }}</p>
+    <p>Subtotal: {{ subtotal |currency:'INR'}}</p>
+    <p>Discount: {{discount | number: '1.2-2'}}</p>
+    <p>VAT: {{ vatTax | number: '1.2-2' }}</p>
+    <p>Total: {{ total | number: '1.2-2' }}</p>
+  
+    <!-- Close Button -->
+    <button class="close-button" (click)="closeReceipt()">Close</button>
+  </div>

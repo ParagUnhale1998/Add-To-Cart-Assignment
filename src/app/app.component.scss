@@ -18,10 +18,12 @@ scroll-behavior: smooth;
 
 }
 app-all-products{
+    padding: 0 5%;
     width: 50%;
     height: 100%;
     position: relative;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    // border: 1px solid green;
+    z-index: 99;
+    border: 1px solid green;
 }
