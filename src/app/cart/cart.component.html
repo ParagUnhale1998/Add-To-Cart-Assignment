@@ -1,0 +1,56 @@
+<div class="cart-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="cartItems.length > 0 else noItems">
+        <!-- Loop through cart items and display them here -->
+        <tr *ngFor="let item of cartItems">
+          <td>{{item.title}}</td>
+          <td>{{item.price}}</td>
+          <td>
+            <input type="number" [(ngModel)]="item.quantity" (ngModelChange)="updateItem(item)">
+          </td>
+          <td>{{  item.total || item.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Cart Summary -->
+    <div class="cart-summary">
+      <h3>Summary</h3>
+      <table>
+        <tr>
+          <td>Subtotal</td>
+          <td>{{ subtotal }}</td>
+        </tr>
+        <tr>
+          <td>VAT Tax</td>
+          <td>{{ vatTax | number: '1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td>Discount</td>
+          <td>{{ discount | number: '1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td>{{ total | number: '1.2-2'}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="buttonContainer">
+        <button class="cancel-button" (click)="removeAllItems()">Cancel Sale</button>
+        <button class="process-button" (click)="processSale()">Process Sale</button>
+    </div>
+  </div>
+  
+  <!-- Message when no items in cart -->
+  <ng-template #noItems>
+    <p class="no-items-message">No products available in the cart.</p>
+  </ng-template>
+  
